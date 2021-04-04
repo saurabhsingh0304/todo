@@ -1,0 +1,13 @@
+{% include "base.html" %}
+{% include "navbar.html" %}
+<body>
+<p>
+    Are you sure you want to delete "{{ item.title }}"?
+</p>
+<a href="{% url 'task' %}">Cancel</a>
+<form method="post" action="">
+    {% csrf_token %}
+    <input type="submit" name="Confirm">
+</form>
+</body>
+</html>

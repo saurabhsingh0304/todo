@@ -1,0 +1,9 @@
+{% include "base.html" %}
+{% include "navbar.html" %}
+
+<body>
+    <form method="get" action="{% url 'apiaccess' %}">
+    <h3>Apikey: {{ apikey }}</h3>
+    <button type="submit">Regenerate Apikey</button>
+</form>
+</body>

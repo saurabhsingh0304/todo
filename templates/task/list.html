@@ -1,0 +1,83 @@
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+
+<style>
+	body{
+		background-color: #638CB8;
+	}
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+	input::placeholder {
+	  color: #d3d3d3;
+	}
+	.submit{
+		background-color: #6ba3e8;
+	}
+	.center-column{
+		width:600px;
+		margin: 20px auto;
+		padding:20px;
+		background-color: #fff;
+		border-radius: 3px;
+		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+	}
+	.item-row{
+		background-color: #906abd;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 3px;
+		color: #ffffff;
+		font-size: 16px;
+		box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 0.75);
+	}
+	.btn-danger{
+		background-color: #ffae19;
+		border-color: #e59400;
+	}
+</style>
+
+<div class="center-column">
+	<form method="POST">
+		{% csrf_token %}
+        <h4>Add Title</h4>
+		<input type="text" name="title" id="title" placeholder="Add tittle">
+        <h4>Add Description</h4>
+        <input type="text" name="description" id="description" placeholder="Add description">
+        <h4>Select Category</h4>
+        <h5>
+            <label class="radio-inline"><input type="radio" id="pending" value="1" checked name=category>Pending</label>
+            <label class="radio-inline"><input type="radio" id="complete" value="2" checked name=category>Complete</label>
+        </h5>
+        <h4>Due Date</h4>
+        <input type="date" name='due_date'>
+		<input class="btn btn-info" type="submit" name="Create Task">
+	</form>
+    
+	{% for task in tasks %}
+	<div class="item-row">
+        <h4>Title</h4>
+		<h5>{{ task.title }}</h5>
+        <br>
+        <h5>Description</h5>
+        <p>{{ task.description }}</p>
+        <h5>Category</h5>
+        <p>
+            {% if task.category == 1 %}Pending 
+            {% else %}Complete 
+            {% endif %}
+        </p>
+        <p>{{ task.due_date }}</p>
+		<a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+		<a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">Delete </a>
+		<br>
+		<br>
+	</div>
+	{% endfor %}
+</div>
+
+</body>
+</html>
