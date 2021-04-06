@@ -56,6 +56,25 @@
         <input type="date" name='due_date'>
 		<input class="btn btn-info" type="submit" name="Create Task">
 	</form>
+	<form method="GET" action="">
+		<div>
+		<label for="title"> Search Title</label>
+		<input type="text" name="title" id="title" required>
+		</div>
+		<div>
+		<label for="category">Choose Category</label>
+		<select name="category" id="category">
+			<option value="0">All</option>
+			<option value="1">Pending</option>
+			<option value="2">Complete</option>
+		</select>
+		</div>
+		<div>
+		<label for="due_date">Select Due Date</label>
+		<input type="date" name='due_date'>
+		<input class="btn btn-success" type="submit" name="Create Task">
+		</div>
+	</form>
     
 	{% for task in tasks %}
 	<div class="item-row">

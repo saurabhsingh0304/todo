@@ -89,6 +89,17 @@ def tasklist(request):
         category=category, due_date=due_date)
         task.save()
         return redirect("/")
+    elif request.method == "GET":
+        title = request.GET.get('title')
+        category = request.GET.get('category')
+        due_date = request.GET.get('due_date')
+        if title != None and category != None and due_date != None:
+            if category == "0":
+                tasks = Task.objects.filter(task_user=request.user, title=title,
+                                           due_date=due_date)
+            else:
+                tasks = Task.objects.filter(task_user=request.user, title=title,
+                                           category=int(category), due_date=due_date)
     context = {
         'tasks': tasks,
     }
